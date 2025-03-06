@@ -1,41 +1,42 @@
-# TSA Traveler Complaints Dataset
+# Washington State Certified Public Accountants
 
 ## Overview
 
-This dataset contains monthly counts of traveler complaints filed with the Transportation Security Administration (TSA) across various airports. Complaints are categorized by airport, category, and subcategory, providing insights into traveler experiences and recurring issues over time.
+This dataset lists individuals who hold, or have held credentials from the Washington State Board of Accountancy. The Board of Accountancy provides this data to aid in verifying credentials and disciplinary history. There is a growing demand for CPAs in Washington state, which aligns with the nationwide trend of a growing demand for skilled accounting professionals due to a talent shortage in the field. However the Board does not guarantee the use of this information for any purpose and as such, the information obtained from this database should not be considered an official endorsement of any individual or firm. 
+
+In WA, CPA licenses are valid for 3 years and must be renewed between January 1 and April 30. 
+
+CPA mobility allows a licensed CPA from one state to practice in another state or to transfer your license to another state hence the data shows WA licensed CPAs being in different states and Countries. 
 
 ## Importance of the Data
 
-This data is crucial for understanding the effectiveness and efficiency of TSA operations across different airports. Policymakers and stakeholders can identify systemic issues, improve security screening processes, and enhance traveler satisfaction by analyzing complaint patterns. Additionally, it promotes transparency and accountability within the TSA, helping to ensure that traveler concerns are addressed and service standards are maintained.Improving the overall airport and security experience and providing insights that can help shape better practices, procedures, and policies. Such as: 
+This data provides valuable insights for regulatory bodies, businesses, CPA firms, job recruiters, policymakers, and even CPAs themselves. It helps track industry trends, ensure compliance, and inform business decisions. Such as: 
 
-### 1. Improves Customer Service
-   - Identifies recurring issues that affect passenger satisfaction.
-   - Helps the TSA enhance service quality, leading to smoother travel experiences.
+### 1. State Boards of Accountancy: 
+Can monitor license holders to ensure compliance with Washington’s CPA requirements, even if they live out of state.
+### 2. Renewal & Compliance Tracking:
+Helps track how many CPAs maintain their license, even after relocating.
 
-### 2. Identifies Trends and Patterns
-   - Highlights common problems, such as long wait times or inefficient screenings.
-   - Provides the TSA with actionable insights for targeted improvements.
+### 3. Mobility & Relocation Patterns: 
+Understanding how many CPAs move out of Washington but keep their licenses helps assess workforce mobility.
+### 4. Multi-State Practice: 
+Identifies how many CPAs may be serving clients across different states, which is useful for firms expanding operations.
 
-### 3. Enhances Security Procedures
-   - Allows the TSA to refine security processes while ensuring they remain effective.
-   - Balances the need for robust security with minimizing delays and inconvenience for passengers.
+### 5.Recruitment & Talent Acquisition:
+Employers can use this data to identify areas with high concentrations of CPAs for hiring purposes.
+### Remote Work Trends: 
+With remote work becoming more common, companies may look at this data to analyze where CPAs are practicing from.
 
-### 4. Ensures Accountability and Transparency
-   - Promotes trust by allowing passengers to hold the TSA accountable for their actions.
-   - Transparent reporting and addressing of complaints help maintain public confidence.
-
-By analyzing TSA complaint data, the agency can continuously improve both security and customer service, making air travel safer and more efficient for everyone.
+### 6. License Status Verification: 
+Ensures that CPAs representing themselves as Washington-licensed are actually in compliance.
 
 ## Data Source
 
-The data is collected and maintained by the Transportation Security Administration (TSA). Each record represents the total number of complaints received for a specific airport, category, and subcategory within a given month. In its FOIA Electronic Reading Room, the TSA publishes semi-regular reports on the monthly numbers of traveler complaints by airport, category, and subcategory. The data can be accessed from the TSA FOIA Electronic Reading Room at [tsa.gov/foia/readingroom](https://www.tsa.gov/foia/readingroom?page=0).
-
-The Data Liberation Project has cleaned and converted the data from PDF format into a more accessible CSV format, making it easier for analysis and research.[tsa-complaint-counts](https://www.data-liberation-project.org/datasets/tsa-complaint-counts/).
+The data is collected and maintained by the Washington State Open Data Portal. Each record represents the tindividuals who hold, or have held credentials from the Washington State Board of Accountancy. To inquire about any disciplinary actions taken against an individual or firm, please contact enforcement at (360) 664-9266. For all other inquiries, please contact customer service at (360) 753-2586.
 
 ## Malloy Code Files
 
-
-This repository contains two Malloy code files:
+This repository contains one Malloy code files:
 
 - [complaints.malloynb](https://github.com/nmonareng/TSA-Complaints/blob/main/complaints.malloynb)
 
