@@ -44,53 +44,27 @@ This repository contains one Malloy code files:
 
 ## Summary of Findings
 
-The results provide an overview of the analyzed complaints; however, they may not be fully comprehensive. Unfortunately, some complaints have not been allocated to an airport, category, or subcategory due to missing or incomplete data. As a result, certain insights may be limited, and the findings should be interpreted with this consideration in mind.
-
-Using Malloy, a summary of complaints by country has been generated and this is the code:
-
-This calculation helps analyze the proportion of total complaints attributed to different countries, providing insights into geographic trends in traveler concerns. The results of this code is shown below under visualizations. 
-
-```
-SubCategory_Complaints -> {
-    group_by: Airport_code.country_name
-    aggregate: total_complaints
-    # percent
-    all_complaints is total_complaints / all(total_complaints)
-}
-```
+### Number of active CPAs
+The data shows that a total of 24,377 people currently hold an active WA CPA license from 1903 to present. Though these candidates hold the WA CPA license, only 52% are still in WA and the rest are in other States or Countries. This is as a result of CPA mobility, which allows CPA to use their licenses out of state. This dataset helps track how many CPAs maintain their license, even after relocating. 
 
 
-### Visualization
-
-## Below are images showcasing some of the main findings from the analysis:
-
-This summary is a result of the above Malloy code. It provides a high-level overview of total complaints in the 448 airports. It further shows the distribution of the complaints to the various airports in different countries with USA leading with the most complaints as it is known to for having the largest number of people flying through it's aiports. With this data we were able to further deduce that 2022 going to 2023 had the most complaints as a result of covid and this is shown in the bar_chart below. 
-
-<img src="https://github.com/nmonareng/TSA-Complaints/blob/main/Summary_of_findings.png?raw=true" width="500">
+### Growth in CPAs
+WA has seen a steady growth in CPAs from 2005 to date, with 2022 peaking at 1,867 issued licenses. On March 17, 2022, Governor Inslee signed Senate Bill 5519 into law. The purpose of this legislation was to: Move the remaining CPA-Inactive Certificate holders to an inactive licensee status to remove the confusion surrounding the CPA-Inactive designation. This meant that individuals who held a CPA-Inactive Certificate could not hold out or practice public accounting during the time in which they were in an inactive status. This may have nudged a lot of people to renew their licenses.
 
 
+### Mobility & Relocation Patterns
+The AICPA has mutual recognition agreements (MRAs) with nine professional bodies of accounting in other parts of the world. This means that a US CPA license enables you to practice accounting in these international countries. 
+- South Africa
+- Australia
+- New Zealand
+- Canada
+- Hong Kong
+- Ireland
+- Mexico
+- Scotland
 
-### Finding 1
+### Majority (48%) practice in Japan followed by South Korea at 17%, this shows that the CPA license allows for relocation and growth. 
 
-This visualization shows the categories with consistently increasing or decreasing complaint trends. The most increasing categories involve Additional Information Required/Insufficient Information,customer service, patdown, screening procedures, and property damage/loss. Some categories, such as Animals, maintain a consistent number of complaints, indicating ongoing concerns in those areas. During COVID-19 airports had to implement a lot of changes such as flight bans, new regulations, and restrictions which led to increased complaints.Understanding this breakdown helps prioritize areas for improvement.  
-
-<img src="https://github.com/nmonareng/TSA-Complaints/blob/main/Findings1.png" width="500">
-
-
-
-### Finding 2
-
-This time-series chart tracks the total number of complaints submitted each month. The data reveals long-term trends in passenger dissatisfaction with TSA procedures. There is a clear pattern of increased complaints during peak travel seasons (summer and holidays), suggesting that TSA resources may need to be adjusted accordingly. TSA complaints increased significantly after mid-2021, likely due to the post-COVID travel surge. Complaints remain consistently high, suggesting persistent passenger frustrations with TSA operations and there is no clear downward trend, meaning issues have not been fully resolved.
-
-<img src="https://github.com/nmonareng/TSA-Complaints/blob/main/Findings2.png" width="500">
-
-
-
-### Finding 3
-
-This chart highlights how complaints in different sub_categories fluctuate over time. The data helps identify which passenger groups are experiencing more issues over time like, concerns related to Active Duty Military and Age-related complaints.A major spike in a particular subcategory occurred around 2021, possibly due to a policy change. Age-related complaints show irregular patterns, implying potential issues affecting older travelers during specific periods. This may indicate that they were handled, escalated, or remained unresolved. A significant portion of complaints appear to be left unresolved, pointing to potential gaps in TSA’s response system. 
-
-<img src="https://github.com/nmonareng/TSA-Complaints/blob/main/Findings3.png" width="500">
 
 
 # How to Open a Shared GitHub File and Run Malloy Code
