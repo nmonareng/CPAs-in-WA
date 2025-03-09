@@ -1,0 +1,176 @@
+>>>malloy
+source: WA_CPAs is duckdb.table('./cpa.csv') extend {
+
+dimension:
+city is lower(`City`) -- Use the lowercase city to avoid duplications.
+dimension: license is `License Number`:::string
+measure:
+total_licensed is count()
+
+  view: licensed_cpa is {
+        where: Status = 'Licensed to practice public accounting' 
+        group_by: Status 
+        aggregate: `Total Licensed CPAs` is total_licensed
+        
+}
+
+view: inactive_cpa is {
+  where: Status != 'Licensed to practice public accounting' 
+  group_by: Status
+  aggregate: `Total Licensed CPAs` is total_licensed
+       # percent
+       `% of Total CPAs` is (`total_licensed`) / all(total_licensed)
+}
+
+}
+>>>markdown
+### There is a growing demand for CPAs in Washington state, which aligns with the nationwide trend of a growing demand for skilled accounting professionals due to a talent shortage in the field. However this data shows almost half of individuals who attained this license currently out of status. 
+### In WA, CPA licenses are valid for 3 years and must be renewed between January 1 and April 30. 
+
+### CPA mobility allows a licensed CPA from one state to practice in another state or to transfer your license to another state hence the data shows WA licensed CPAs being in different states and Countries. 
+>>>markdown
+The data shows that people who currently hold an active CPA license from 1903 to present are 24,377. Though these candidates  hold the WA CPA license, only 52% are still in WA and the rest are in other States or Countries. 
+>>>malloy
+run:WA_CPAs -> licensed_cpa + {
+    nest: `Distribution of CPAs` is {
+    group_by: State
+    aggregate:total_licensed
+    # percent
+    `% of Total CPAs` is (`total_licensed`) / all(total_licensed)
+    limit:10
+}
+}
+>>>markdown
+Majority (47%) of the inactive licenses are due to non-renewal to failure to pay the renewal fee on time or failure to meet the CPE requirements on time. The second highest (20%) category is retired licenses. This refers to a Certified Public Accountant (CPA) who has officially retired their professional license, meaning they are no longer actively practicing accounting but can still use the "CPA" title with the designation "Retired" to indicate their past professional status
+>>>malloy
+--# bar_chart
+run:WA_CPAs -> inactive_cpa 
+>>>markdown
+A further analysis of the data for active licensed CPAs in WA indicates that 19% are concentrated in Seattle because of the high concentration of large tech companies like Amazon, Microsoft, and Starbucks headquartered there, creating a significant demand for corporate accounting services within a thriving economy.
+>>>malloy
+run:WA_CPAs -> licensed_cpa + {
+    where: State = 'WA'
+    nest: `Distribution of CPAs` is {
+    group_by: city
+    aggregate:total_licensed
+    # percent
+    `% of Total CPAs` is (`total_licensed`) / all(total_licensed)
+    limit:5
+}
+}
+>>>markdown
+Only a few individuals preferred name versus their legal first name. Primarily this is for branding and marketing reasons, often opting for a shorter, more memorable version that could be easier to pronounce or spell,  this is particularly common in situations where their legal name is long or difficult to remember. Examples on this dataset would be Liangchun and Xuying
+>>>malloy
+run:WA_CPAs -> {
+    group_by: `Preferred Name`, `First Name`
+    aggregate: total_licensed
+    where: `Preferred Name` is not null
+    
+}
+>>>markdown
+WA has seen a steady growth in CPAs from 2005 to date, with 2022 peaking at 1,867 issued licenses. On March 17, 2022, Governor Inslee signed Senate Bill 5519 into law. The purpose of this legislation was to: Move the remaining CPA-Inactive Certificate holders to an inactive licensee status to remove the confusion surrounding the CPA-Inactive designation. This meant that individuals who held a CPA-Inactive Certificate could not hold out or practice public accounting during the time in which they were in an inactive status. This may have nudged a lot of people to renew their licenses.
+>>>malloy
+# line_chart
+run:WA_CPAs -> {
+    group_by: `Original Issue Date`.year
+    aggregate: total_licensed
+    
+}
+>>>markdown
+### There is a jump from 10 to 17 individuals being placed under the category of Holds a CPA License in an Inactive status in 2022 from 2019. 
+>>>malloy
+--# line_chart
+run:WA_CPAs -> inactive_cpa + {
+    where: Status = 'Holds a CPA License in an Inactive status (not licensed to practice as a CPA)'
+    nest: `Jump is the number of individuals who Holds a CPA License in an Inactive status` is {
+    group_by: `Original Issue Date`.year 
+    aggregate: total_licensed
+    calculate: 
+    prior_year_total is lag(total_licensed, 1)
+    licenseJump is (total_licensed - lag(total_licensed, 1)) 
+    
+
+    } 
+}
+>>>markdown
+### 55% of the WA CPAs outside Washington have active licenses. 
+>>>malloy
+# bar_chart
+run:WA_CPAs -> {
+    where: State != 'WA'
+    group_by: Status 
+    aggregate: total_licensed
+
+    # tooltip
+     # percent
+    `%` is (`total_licensed`) / all(total_licensed)  
+}
+>>>markdown
+### The AICPA has mutual recognition agreements (MRAs) with nine professional bodies of accounting in other parts of the world. This means that a US CPA license enables you to practice accounting in these international countries. 
+- South Africa
+- Australia
+- New Zealand
+- Canada
+- Hong Kong
+- Ireland
+- Mexico
+- Scotland
+
+### Majority (48%) practice in Japan followed by South Korea at 17%, this shows that the CPA license allows for relocation and growth. 
+>>>malloy
+run:WA_CPAs -> licensed_cpa + {
+    where: Country != 'United States'
+    # bar_chart
+    nest: `CPAs under Mutual Recognition Agreements` is {
+    group_by: Country 
+    aggregate:total_licensed
+
+    # tooltip
+    # percent
+    `% of Total CPAs` is (`total_licensed`) / all(total_licensed)
+    limit:5
+}
+}
+>>>markdown
+### These graphs shows that some CPA holders lapse their licenses, this may be due to not meeting the requirements for renewal, mainly being that CPA licenses can only be renewed in the jurisdiction where you originally obtained it. 
+>>>malloy
+run:WA_CPAs -> inactive_cpa + {
+    where: Country != 'United States'
+    # bar_chart
+    nest: `CPAs with inactive licenses` is {
+    group_by: Country 
+    aggregate:total_licensed
+    
+    # tooltip
+    # percent
+    `% of Total CPAs` is (`total_licensed`) / all(total_licensed)
+    limit: 5
+}
+}
+>>>markdown
+### The Board Order represent disciplinary action taken against a licensee by the Board of Accountancy. The report is in pdf format and can be accessed using the link provided in the results of this query. The board has different penalties ranging from a citation, to a fine and imprisonment. 
+>>>malloy
+run:WA_CPAs -> {
+    where: `Board Order` is not null
+    group_by: `Board Order`
+    aggregate: `Total board orders from 1903 to present` is count()
+
+}
+>>>markdown
+### Using this data, we can see the most common names that hold a WA CPA license and deduce that some people chose a prefered name in order to stand out. 
+>>>malloy
+run:WA_CPAs -> {
+    group_by: `First Name`
+    aggregate: total_licensed
+
+}
+>>>markdown
+A CPA license number typically consists of a combination of letters and numbers, and its length can vary depending on the state. In Washington State, for example, a CPA license number is a series of letters and numbers, such as "CPA12345". 
+>>>malloy
+run:WA_CPAs -> {
+    group_by:
+     `License Number Length` is length(`License Number`)
+
+  
+
+}
