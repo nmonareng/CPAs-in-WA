@@ -47,11 +47,14 @@ This repository contains one Malloy code files:
 ### Number of active CPAs
 The data shows that a total of 24,377 people currently hold an active WA CPA license from 1903 to present. Though these candidates hold the WA CPA license, only 52% are still in WA and the rest are in other States or Countries. This is as a result of CPA mobility, which allows CPA to use their licenses out of state. This dataset helps track how many CPAs maintain their license, even after relocating. 
 
-![CPA License Data](https://github.com/nmonareng/CPAs-in-WA/blob/main/CPA1.png?raw=true)
+![WA CPA Holders](https://github.com/nmonareng/CPAs-in-WA/blob/main/CPA1.png?raw=true)
 
 
 ### Growth in CPAs
 WA has seen a steady growth in CPAs from 2005 to date, with 2022 peaking at 1,867 issued licenses. On March 17, 2022, Governor Inslee signed Senate Bill 5519 into law. The purpose of this legislation was to: Move the remaining CPA-Inactive Certificate holders to an inactive licensee status to remove the confusion surrounding the CPA-Inactive designation. This meant that individuals who held a CPA-Inactive Certificate could not hold out or practice public accounting during the time in which they were in an inactive status. This may have nudged a lot of people to renew their licenses.
+
+
+![CPA growth over years](https://github.com/nmonareng/CPAs-in-WA/blob/main/CPA2.png?raw=true)
 
 
 ### Mobility & Relocation Patterns
